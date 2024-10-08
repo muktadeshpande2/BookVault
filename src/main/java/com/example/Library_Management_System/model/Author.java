@@ -11,8 +11,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class Author {
 
     @Id
@@ -22,6 +20,7 @@ public class Author {
     private String name;
 
     @Column(unique = true, nullable = false)
+    @Getter
     private String email;
 
     //n books here
