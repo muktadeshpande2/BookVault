@@ -18,9 +18,11 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+
+    //JpaRepository interface uses the same method for creating and updating a DB
     @PostMapping("/add")
-    public ResponseEntity<String> addBook(@RequestBody @Valid AddBookRequest addBookRequest) {
-        bookService.addBook(addBookRequest.to());
+    public ResponseEntity<String> addOrUpdateBook(@RequestBody @Valid AddBookRequest addBookRequest) {
+        bookService.addBookOrUpdate(addBookRequest.to());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
