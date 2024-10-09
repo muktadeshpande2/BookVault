@@ -45,10 +45,5 @@ public class BookController {
         }
 
     }
-
-    //TODO->delete a book
-    @DeleteMapping("/remove")
-    public ResponseEntity<String> removeBook(@RequestBody @Valid RemoveBookRequest removeBookRequest) {
-
-    }
+    
 }
