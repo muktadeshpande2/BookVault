@@ -8,15 +8,13 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-public class SearchRequest {
+@Getter @Setter
+public class SearchStudentRequest {
 
     @NotBlank
     private String searchKey;
 
     @NotBlank
     private String searchValue;
-
 
 }
