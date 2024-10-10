@@ -4,13 +4,11 @@ import com.example.Library_Management_System.model.Author;
 import com.example.Library_Management_System.model.Book;
 import com.example.Library_Management_System.model.Genre;
 import com.example.Library_Management_System.model.Publication;
-import com.example.Library_Management_System.repository.AuthorDao;
 import com.example.Library_Management_System.repository.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +50,22 @@ public class BookService {
 
 
     }
+
+//    public void deleteBook(String searchKey, String searchValue) throws Exception {
+//
+//        switch (searchKey) {
+//
+//            case "name" -> bookDao.deleteByBookName(searchValue);
+//            case "genre" -> bookDao.deleteByGenre(Genre.valueOf(searchValue));
+//            case "publication" -> bookDao.deleteByPublication(Publication.valueOf(searchValue));
+//            case "author_name" -> bookDao.deleteByAuthorName(searchValue);
+//            case "id" -> {
+//                bookDao.deleteById(Integer.valueOf(searchValue));
+//
+//            }
+//            default -> throw new Exception("Invalid Search Key: " + searchKey);
+//        }
+//    }
 
 
 }
