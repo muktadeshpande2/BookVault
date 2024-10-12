@@ -1,5 +1,6 @@
 package com.example.Library_Management_System.model;
 
+import com.example.Library_Management_System.dto.BookResponse;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -52,6 +53,19 @@ public class Book {
 
     @UpdateTimestamp
     private Date updatedOn;
+
+
+    //model to dto conversion
+    public BookResponse to() {
+        return BookResponse.builder()
+                .bookName(this.bookName)
+                .bookPrice(this.bookPrice)
+                .genre(this.genre)
+                .publication(this.publication)
+                .createdOn(this.createdOn)
+                .updatedOn(this.updatedOn)
+                .build();
+    }
 }
 
 //@JoinColumn specifies the foreign key column

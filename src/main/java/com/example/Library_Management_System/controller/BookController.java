@@ -1,7 +1,9 @@
 package com.example.Library_Management_System.controller;
 
 import com.example.Library_Management_System.dto.AddBookRequest;
+import com.example.Library_Management_System.dto.BookResponse;
 import com.example.Library_Management_System.dto.SearchBookRequest;
+import com.example.Library_Management_System.dto.SearchBookResponse;
 import com.example.Library_Management_System.model.Book;
 import com.example.Library_Management_System.service.BookService;
 import jakarta.validation.Valid;
@@ -10,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class BookController {
 
 
     //JpaRepository interface uses the same method for creating and updating a DB
-    @PostMapping("/add")
+    @PostMapping("/createResponse")
     public ResponseEntity<String> addOrUpdateBook(@RequestBody @Valid AddBookRequest addBookRequest) {
         bookService.addBookOrUpdate(addBookRequest.to());
 
@@ -32,27 +33,18 @@ public class BookController {
     }
 
 
-    //TODO -> convert to dto
-    //Search book by id, name, genre, publication, author_name
     @GetMapping("/search")
-    public List<Book> searchBook(@RequestBody @Valid SearchBookRequest searchbookRequest){
+    public SearchBookResponse searchBook(@RequestBody @Valid SearchBookRequest searchbookRequest){
         try {
-            return bookService.searchBook(searchbookRequest.getSearchKey(), searchbookRequest.getSearchValue());
+            List<Book> bookList =  bookService.searchBook(searchbookRequest.getSearchKey(), searchbookRequest.getSearchValue());
+            List<BookResponse> bookResponseList = searchbookRequest.createResponse(bookList);
+
+            return new SearchBookResponse(bookResponseList);
         } catch (Exception e) {
-            return new ArrayList<>();
+            //createResponse appropriate exception
+            return new SearchBookResponse();
         }
 
     }
     //TODO->delete a book
-//    @DeleteMapping("/remove")
-//    public ResponseEntity<String> removeBook(@RequestBody @Valid RemoveBookRequest removeBookRequest) {
-//        try {
-//            bookService.deleteBook(removeBookRequest.getSearchKey(), removeBookRequest.getSearchValue());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Invalid searchKey: " + removeBookRequest.getSearchKey());
-//        }
-//
-//        return ResponseEntity.status(HttpStatus.OK).body("Book Deletion Successful");
-//    }
 }
