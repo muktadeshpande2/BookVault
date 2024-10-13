@@ -1,7 +1,6 @@
 package com.example.Library_Management_System.controller;
 
-import com.example.Library_Management_System.dto.AddStudentRequest;
-import com.example.Library_Management_System.dto.SearchStudentRequest;
+import com.example.Library_Management_System.dto.*;
 import com.example.Library_Management_System.model.Student;
 import com.example.Library_Management_System.service.StudentService;
 import jakarta.validation.Valid;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,11 +30,13 @@ public class StudentController {
 
 
     @GetMapping("/search")
-    public List<Student> searchStudent(@RequestBody @Valid SearchStudentRequest searchStudentRequest){
+    public SearchStudentResponse searchStudent(@RequestBody @Valid SearchStudentRequest searchStudentRequest){
         try {
-            return studentService.searchStudent(searchStudentRequest.getSearchKey(), searchStudentRequest.getSearchValue());
+            List<Student> studentList = studentService.searchStudent(searchStudentRequest.getSearchKey(), searchStudentRequest.getSearchValue());
+            List<StudentResponse> studentResponseList = searchStudentRequest.createResponse(studentList);
+            return new SearchStudentResponse(studentResponseList);
         } catch (Exception e) {
-            return new ArrayList<>();
+            return new SearchStudentResponse();
         }
 
     }

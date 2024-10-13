@@ -1,5 +1,6 @@
 package com.example.Library_Management_System.model;
 
+import com.example.Library_Management_System.dto.StudentResponse;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -46,4 +47,16 @@ public class Student {
 
     @UpdateTimestamp
     private Date updatedOn;
+
+    public StudentResponse to() {
+        return StudentResponse.builder()
+                .name(this.name)
+                .email(this.email)
+                .age(this.age)
+                .gender(this.gender)
+                .rollNumber(this.rollNumber)
+                .createdOn(this.createdOn)
+                .updatedOn(this.updatedOn)
+                .build();
+    }
 }
