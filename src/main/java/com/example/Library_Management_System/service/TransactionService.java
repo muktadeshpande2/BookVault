@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -221,5 +220,34 @@ public class TransactionService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public List<Transaction> searchTransaction(String searchKey, String searchValue) throws Exception {
+        if(searchKey.equals("TransactionType")) {
+            if(searchValue.equals("ISSUE")) {
+                return transactionDao.findByTransactionType(TransactionType.ISSUE);
+            }
+
+            if(searchValue.equals("RETURN")) {
+                return transactionDao.findByTransactionType(TransactionType.RETURN);
+            }
+        }
+
+        if(searchKey.equals("TransactionStatus")) {
+            switch (searchValue) {
+                case "SUCCESS" -> {
+                    return transactionDao.findByTransactionStatus(TransactionStatus.SUCCESS);
+                }
+                case "FAILURE" -> {
+                    return transactionDao.findByTransactionStatus(TransactionStatus.FAILURE);
+                }
+                case "PENDING" -> {
+                    return transactionDao.findByTransactionStatus(TransactionStatus.PENDING);
+                }
+            }
+
+        }
+
+        throw new Exception("Invalid Search Key: " + searchKey);
     }
 }

@@ -1,9 +1,9 @@
 package com.example.Library_Management_System.model;
 
+import com.example.Library_Management_System.dto.TransactionResponse;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-
 
 import java.util.Date;
 
@@ -43,4 +43,13 @@ public class Transaction {
     @ManyToOne
     @JoinColumn
     private Student student;
+
+    public TransactionResponse to() {
+        return TransactionResponse.builder()
+                .fine(this.fine)
+                .transactionId(this.transactionId)
+                .transactionStatus(this.transactionStatus)
+                .transactionType(this.transactionType)
+                .build();
+    }
 }
