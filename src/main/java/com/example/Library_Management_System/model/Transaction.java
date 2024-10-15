@@ -27,22 +27,20 @@ public class Transaction {
     @Enumerated(value = EnumType.STRING)
     private TransactionStatus transactionStatus;
 
-    @ManyToOne
-    @JoinColumn
-    private Admin transaction_admin;
-
-    @ManyToOne
-    @JoinColumn
-    private Book transaction_book;
-
-    @ManyToOne
-    @JoinColumn
-    private Student transaction_student;
-
-    //fine
     private Integer fine;
 
     @CreationTimestamp
     private Date createdOn;
 
+    @ManyToOne
+    @JoinColumn
+    private Admin admin;
+
+    @ManyToOne
+    @JoinColumn
+    private Book book;
+
+    @ManyToOne
+    @JoinColumn
+    private Student student;
 }

@@ -39,7 +39,7 @@ public class Student {
 
     //n transactions here
     //What is the relationship type
-    @OneToMany(mappedBy = "transaction_student")
+    @OneToMany(mappedBy = "student")
     private List<Transaction> transactionList;
 
     @CreationTimestamp

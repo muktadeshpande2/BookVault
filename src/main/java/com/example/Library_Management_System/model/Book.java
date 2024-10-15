@@ -45,7 +45,7 @@ public class Book {
 
     //n transactions here
     //What is the relationship type
-    @OneToMany(mappedBy = "transaction_book")
+    @OneToMany(mappedBy = "book")
     private List<Transaction> transactionList;
 
     @CreationTimestamp

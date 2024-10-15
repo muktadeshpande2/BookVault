@@ -33,7 +33,7 @@ public class Admin {
 
     //n transactions here
     //What is the relationship type
-    @OneToMany(mappedBy = "transaction_admin")
+    @OneToMany(mappedBy = "admin")
     private List<Transaction> transactionList;
 
     @CreationTimestamp
