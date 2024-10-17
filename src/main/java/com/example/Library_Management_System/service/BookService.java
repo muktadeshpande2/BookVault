@@ -5,6 +5,7 @@ import com.example.Library_Management_System.model.Book;
 import com.example.Library_Management_System.model.Genre;
 import com.example.Library_Management_System.model.Publication;
 import com.example.Library_Management_System.repository.BookDao;
+import com.example.Library_Management_System.repository.TransactionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ public class BookService {
 
     @Autowired
     AuthorService authorService;
+
+    @Autowired
+    TransactionDao transactionDao;
 
 
     public void addBookOrUpdate(Book book) {
@@ -49,6 +53,19 @@ public class BookService {
         };
 
 
+    }
+
+    public String deleteBook(Book book) throws Exception {
+        Optional<Book> bookResult = bookDao.findById(book.getId());
+
+        if(bookResult.isEmpty()) {
+            throw new Exception("Invalid book id:" + book.getId());
+        }
+
+        transactionDao.deleteByBookId(book.getId());
+        bookDao.deleteById(book.getId());
+
+        return "Book has been deleted successfully";
     }
 
 //    public void deleteBook(String searchKey, String searchValue) throws Exception {
