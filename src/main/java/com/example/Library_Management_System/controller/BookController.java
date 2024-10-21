@@ -4,8 +4,7 @@ import com.example.Library_Management_System.dto.*;
 import com.example.Library_Management_System.model.Book;
 import com.example.Library_Management_System.service.BookService;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/book")
 public class BookController {
 
-    private static final Logger log = LoggerFactory.getLogger(BookController.class);
     @Autowired
     BookService bookService;
 
@@ -38,15 +37,14 @@ public class BookController {
         try {
             List<Book> bookList =  bookService.searchBook(searchbookRequest.getSearchKey(), searchbookRequest.getSearchValue());
             List<BookResponse> bookResponseList = searchbookRequest.createResponse(bookList);
-
             return new SearchBookResponse(bookResponseList);
         } catch (Exception e) {
-            //createResponse appropriate exception
+            log.error(e.getMessage());
             return new SearchBookResponse();
         }
 
     }
-    //TODO->delete a book
+
 
     @DeleteMapping("/delete")
     public DeleteBookResponse deleteBook(@RequestBody @Valid DeleteBookRequest deleteBookRequest){
@@ -55,7 +53,7 @@ public class BookController {
             String result = bookService.deleteBook(deleteBookRequest.to());
             return new DeleteBookResponse(result);
         } catch (Exception e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
             return new DeleteBookResponse();
         }
 
