@@ -4,6 +4,7 @@ import com.example.Library_Management_System.model.Author;
 import com.example.Library_Management_System.model.Book;
 import com.example.Library_Management_System.model.Genre;
 import com.example.Library_Management_System.model.Publication;
+import com.example.Library_Management_System.repository.AuthorDao;
 import com.example.Library_Management_System.repository.BookDao;
 import com.example.Library_Management_System.repository.TransactionDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class BookService {
 
     @Autowired
     TransactionDao transactionDao;
+
+    @Autowired
+    AuthorDao authorDao;
 
 
     public void addBookOrUpdate(Book book) {
@@ -61,9 +65,15 @@ public class BookService {
         if(bookResult.isEmpty()) {
             throw new Exception("Invalid book id:" + book.getId());
         }
+        Author author = bookResult.get().getBook_author();
+        List<Book> bookList = bookDao.findByAuthorName(author.getName());
 
         transactionDao.deleteByBookId(book.getId());
         bookDao.deleteById(book.getId());
+
+        if(bookList.size() == 1){
+            authorDao.deleteByName(author.getName());
+        }
 
         return "Book has been deleted successfully";
     }
