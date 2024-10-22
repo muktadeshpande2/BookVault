@@ -9,15 +9,13 @@ import lombok.*;
 @Getter @Setter
 public class InitiateTransactionRequest {
 
-    //Student can tell verbally
+
     @NotNull
     private String studentRollNumber;
 
-    //Admin knows his/her id
     @NotNull
     private Integer adminId;
 
-    //Book id is printed on the book
     @NotNull
     private Integer bookId;
 

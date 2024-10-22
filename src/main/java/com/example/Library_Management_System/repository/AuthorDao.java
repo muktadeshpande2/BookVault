@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AuthorDao extends JpaRepository<Author, Integer> {
-    //in Hibernate we can create method like findByX() where X is column of the table
+
     Author findByEmail(String email);
 
     @Transactional

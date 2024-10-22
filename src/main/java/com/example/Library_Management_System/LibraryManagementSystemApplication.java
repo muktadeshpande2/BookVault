@@ -23,8 +23,7 @@ public class LibraryManagementSystemApplication implements CommandLineRunner{
 		log.info("Here after run");
 	}
 
-	//run method is executed before the execution of the application code
-	//It can be used to call an API or create data etc beforehand
+
 	@Override
 	public void run(String... args) throws Exception {
 		log.info("Here while run");

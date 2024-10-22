@@ -37,8 +37,6 @@ public class Student {
     @OneToMany(mappedBy = "book_student")
     private List<Book> bookList;
 
-    //n transactions here
-    //What is the relationship type
     @OneToMany(mappedBy = "student")
     private List<Transaction> transactionList;
 

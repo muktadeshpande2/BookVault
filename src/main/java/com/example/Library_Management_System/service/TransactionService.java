@@ -25,8 +25,6 @@ public class TransactionService {
     @Autowired
     TransactionDao transactionDao;
 
-    //These values are defined in application.properties to make it convenient to configure them. Change value at one place, will be
-    //reflected everywhere else
     @Value("${student.allowed.duration}")
     Integer allowedDuration;
 
@@ -41,18 +39,9 @@ public class TransactionService {
                 issueBook(initiateTransactionRequest) : returnBook(initiateTransactionRequest);
     }
 
-    /**
-     * Issue a book (Issuance) -> studentRollNumber, bookId, adminId
-     * 1. Validate the request -> student, book and admin is valid or not
-     * 2. Validate if book is available or not -> If book is already issued on someone's name
-     * 3. Validate if the book can be issued to a person or not => Check whether issue limit is available or not in student account
-     * 4. Entry in transaction table -> PENDING STATUS
-     * 5. Assign book to a student -> Update student column in book table
-     * 6. Update the status -> SUCCESS STATUS
-     **/
+
 
     private String issueBook(InitiateTransactionRequest initiateTransactionRequest) throws Exception {
-        //1. Validate the request
 
         Student student = validateStudent(initiateTransactionRequest.getStudentRollNumber());
         if(student == null) {
@@ -69,20 +58,16 @@ public class TransactionService {
             throw new Exception("Invalid Book");
         }
 
-        // 2. Check book availability
-
         if(book.getBook_student() != null) {
             throw new Exception("This book has already been issued to " + book.getBook_student().getName());
         }
 
-        // 3. Check if book can be issued
         if(student.getBookList().size() >= maxBooksAllowed) {
             throw new Exception("Issue limit reached for this student");
         }
 
         Transaction transaction = null;
         try {
-            // 4. Entry in transaction table
 
              transaction = Transaction.builder()
                     .transactionId(UUID.randomUUID().toString())
@@ -93,15 +78,12 @@ public class TransactionService {
                     .transactionStatus(TransactionStatus.PENDING)
                     .build();
 
-            // 4. Make entry in the transaction table
             transactionDao.save(transaction);
 
 
-            // 5. Assign book to student
             book.setBook_student(student);
             bookService.addBookOrUpdate(book);
 
-            // 6. Update the transaction status
             transaction.setTransactionStatus(TransactionStatus.SUCCESS);
 
         } catch (Exception e) {
@@ -116,19 +98,8 @@ public class TransactionService {
         return transaction.getTransactionId();
     }
 
-    /**
-     * Return a book
-     *
-     * 1. Validate the request
-     * 2. Get the corresponding issue transaction
-     * 3. Entry in transaction table -> PENDING STATUS
-     * 4. Due date of book, currentDate - issueDate > allowedDuration => fine calculation
-     * 5. If there is fine => get the fine
-     * 6. Deallocate the book from student's name
-     * 7. Update transaction status -> SUCCESS
-     */
+
     private String returnBook(InitiateTransactionRequest initiateTransactionRequest) throws Exception {
-        //1. Validate the request
 
         Student student = validateStudent(initiateTransactionRequest.getStudentRollNumber());
         if(student == null) {
@@ -145,7 +116,6 @@ public class TransactionService {
             throw new Exception("Invalid Book");
         }
 
-        // 2. Get the corresponding issue transaction
         Transaction issuanceTransaction = transactionDao.findTransactionByStudentAndBookAndTransactionTypeOrderByIdDesc(student, book, TransactionType.ISSUE);
 
         Transaction transaction = null;
@@ -162,15 +132,13 @@ public class TransactionService {
                     .transactionStatus(TransactionStatus.PENDING)
                     .build();
 
-            // 4. Make entry in the transaction table
+
             transactionDao.save(transaction);
 
 
-            // 5. Assign book to student
             book.setBook_student(null);
             bookService.addBookOrUpdate(book);
 
-            // 6. Update the transaction status
             transaction.setTransactionStatus(TransactionStatus.SUCCESS);
         } catch (Exception e) {
             assert transaction != null;

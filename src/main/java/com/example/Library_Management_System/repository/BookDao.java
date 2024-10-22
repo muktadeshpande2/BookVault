@@ -19,16 +19,5 @@ public interface BookDao extends JpaRepository<Book, Integer> {
     @Query("Select b from Book b, Author a where b.book_author.id = a.id and a.name = ?1")
     List<Book> findByAuthorName(String authorName);
 
-//    @Query("DELETE FROM Book b WHERE b.bookName = :name")
-//     void deleteByBookName(String name);
-//
-//     void deleteByGenre(Genre genre);
-//
-//     void deleteByPublication(Publication publication);
-//
-//     @Modifying
-//     @Query("DELETE FROM Book b WHERE b.book_author.name = :authorName")
-//     void deleteByAuthorName(String authorName);
-
 
 }

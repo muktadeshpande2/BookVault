@@ -31,15 +31,9 @@ public class BookService {
 
 
     public void addBookOrUpdate(Book book) {
-        //first check if author already exists or not
-        Author author = authorService.getOrCreate(book.getBook_author());
-        //if it doesn't, create it
 
-        // set the author
-        //the author object returned from the dto does not contain an id, the author object
-        //return from getOrCreate method has the complete author object with all the fields
+        Author author = authorService.getOrCreate(book.getBook_author());
         book.setBook_author(author);
-        //save the book
         bookDao.save(book);
     }
 
@@ -77,22 +71,6 @@ public class BookService {
 
         return "Book has been deleted successfully";
     }
-
-//    public void deleteBook(String searchKey, String searchValue) throws Exception {
-//
-//        switch (searchKey) {
-//
-//            case "name" -> bookDao.deleteByBookName(searchValue);
-//            case "genre" -> bookDao.deleteByGenre(Genre.valueOf(searchValue));
-//            case "publication" -> bookDao.deleteByPublication(Publication.valueOf(searchValue));
-//            case "author_name" -> bookDao.deleteByAuthorName(searchValue);
-//            case "id" -> {
-//                bookDao.deleteById(Integer.valueOf(searchValue));
-//
-//            }
-//            default -> throw new Exception("Invalid Search Key: " + searchKey);
-//        }
-//    }
 
 
 }

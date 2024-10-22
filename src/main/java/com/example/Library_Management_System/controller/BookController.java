@@ -21,7 +21,6 @@ public class BookController {
     BookService bookService;
 
 
-    //JpaRepository interface uses the same method for creating and updating a DB
     @PostMapping("/add")
     public ResponseEntity<String> addOrUpdateBook(@RequestBody @Valid AddBookRequest addBookRequest) {
         bookService.addBookOrUpdate(addBookRequest.to());

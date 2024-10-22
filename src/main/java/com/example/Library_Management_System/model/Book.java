@@ -28,23 +28,17 @@ public class Book {
     @Enumerated(value=EnumType.STRING)
     private Genre genre;
 
-    //For better readability and if the enum would get edited in the future
-    //EnumType.ORDINAL is used for efficiency(throughput) and saving space
     @Enumerated(value=EnumType.STRING)
     private Publication publication;
 
-    //Foreign Key as it refers to the primary key of Author table
     @ManyToOne
     @JoinColumn
     private Author book_author;
 
-    //Foreign key as it refers to the primary key of the Student table
     @ManyToOne
     @JoinColumn
     private Student book_student;
 
-    //n transactions here
-    //What is the relationship type
     @OneToMany(mappedBy = "book")
     private List<Transaction> transactionList;
 
@@ -55,7 +49,6 @@ public class Book {
     private Date updatedOn;
 
 
-    //model to dto conversion
     public BookResponse to() {
         return BookResponse.builder()
                 .bookName(this.bookName)
@@ -68,4 +61,3 @@ public class Book {
     }
 }
 
-//@JoinColumn specifies the foreign key column

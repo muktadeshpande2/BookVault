@@ -24,8 +24,6 @@ public class Author {
     @Getter
     private String email;
 
-    //n books here
-    //What is the relationship type
     @OneToMany(mappedBy = "book_author")
     private List<Book> bookList;
 

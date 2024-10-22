@@ -35,7 +35,7 @@ public class TransactionController {
 
     }
 
-    //Fetch txn on the basis of
+
     @GetMapping("/fetch")
     public FetchTransactionResponse fetchTxn(@RequestBody @Valid FetchTransactionRequest fetchTransactionRequest) {
         try {
@@ -50,10 +50,3 @@ public class TransactionController {
 
 }
 
-
-
-
-//Kind of transaction - issue and return
-
-//what all is needed for a transaction
-//student, book, txn_type, admin

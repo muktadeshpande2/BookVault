@@ -9,7 +9,6 @@ import java.util.List;
 @Getter @Setter
 @Builder
 
-//Why another wrapper dto and not directly use the list object
 public class SearchStudentResponse {
 
     private List<StudentResponse> studentResponseList;

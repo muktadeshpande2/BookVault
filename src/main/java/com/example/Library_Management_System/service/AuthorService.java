@@ -13,14 +13,12 @@ public class AuthorService {
 
     public Author getOrCreate(Author author) {
 
-        //try to get the author with same email
         Author existingAuthor = authorDao.findByEmail(author.getEmail());
-        //if it exists -> return the author object
+
         if(existingAuthor == null) {
             existingAuthor = authorDao.save(author);
         }
 
-        //if it doesn't exist -> create the author and return the same
         return existingAuthor;
 
     }

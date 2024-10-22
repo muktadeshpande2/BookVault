@@ -11,8 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter @Setter
 
-//Why another wrapper dto and not directly use the list object - To maintain a consistent response format across the codebase.
-//ALso, there is room for addition of further data
 public class SearchBookResponse {
 
     private List<BookResponse> bookResponseList;
