@@ -2,10 +2,7 @@ package com.example.Library_Management_System.dto;
 
 import com.example.Library_Management_System.model.Student;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
+@Builder
 public class SearchStudentRequest {
 
     @NotBlank
