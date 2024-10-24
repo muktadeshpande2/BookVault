@@ -10,7 +10,7 @@ public class AdminService {
     @Autowired
     AdminDao adminDao;
 
-    public void createAdmin(Admin admin) {
+    public void createOrUpdateAdmin(Admin admin) {
         adminDao.save(admin);
     }
 

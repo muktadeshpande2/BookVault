@@ -19,9 +19,9 @@ public class AdminController {
     AdminService adminService;
 
     @PostMapping("/create")
-    public ResponseEntity<String>createAdmin(@RequestBody @Valid CreateAdminRequest createAdminRequest) {
+    public ResponseEntity<String>createOrUpdateAdmin(@RequestBody @Valid CreateAdminRequest createAdminRequest) {
 
-        adminService.createAdmin(createAdminRequest.to());
+        adminService.createOrUpdateAdmin(createAdminRequest.to());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
