@@ -92,7 +92,7 @@ public class BookControllerTest {
         when(bookService.searchBook(searchRequest.getSearchKey(), searchRequest.getSearchValue()))
                 .thenReturn(bookList);
 
-        // POST API with valid JSON body
+        // GET API with valid JSON body
         mockMvc.perform(get("/book/search")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(searchRequest)))
@@ -114,6 +114,7 @@ public class BookControllerTest {
         when(bookService.searchBook(searchRequest.getSearchKey(), searchRequest.getSearchValue()))
                 .thenReturn(emptyList);
 
+        // GET API with valid JSON body
         mockMvc.perform(get("/book/search")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(searchRequest)))
@@ -133,7 +134,7 @@ public class BookControllerTest {
                 .thenThrow(new Exception("Invalid Search Key " + searchRequest.getSearchKey()));
 
 
-        // POST API with valid JSON body
+        // GET API with valid JSON body
         mockMvc.perform(get("/book/search")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(searchRequest)))

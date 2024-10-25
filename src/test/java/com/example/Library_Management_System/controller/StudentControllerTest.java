@@ -45,7 +45,7 @@ class StudentControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(studentController).build();
     }
 
-    // Test case for adding or updating a student
+
     @Test
     void testAddOrUpdateStudent_Success() throws Exception {
         AddStudentRequest request = AddStudentRequest.builder()
@@ -56,7 +56,7 @@ class StudentControllerTest {
                                     .age(18)
                                     .build();
 
-
+        // POST API with valid JSON body
         mockMvc.perform(post("/student/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -64,7 +64,7 @@ class StudentControllerTest {
                 .andExpect(content().string("Student Added Successfully"));
     }
 
-    // Test case for searching a student
+
     @Test
     void testSearchStudent_Success() throws Exception {
 
@@ -89,7 +89,7 @@ class StudentControllerTest {
                 .thenReturn(students);
 
 
-        // POST API with valid JSON body
+        // GET API with valid JSON body
         mockMvc.perform(get("/student/search")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(searchRequest)))
@@ -99,7 +99,7 @@ class StudentControllerTest {
 
     }
 
-    // Test case for handling an empty search result
+
     @Test
     void testSearchStudent_NoResult() throws Exception {
         SearchStudentRequest searchRequest = new SearchStudentRequest();
@@ -111,6 +111,7 @@ class StudentControllerTest {
         // Mocking the service
         when(studentService.searchStudent("email", "unknown@example.com")).thenReturn(emptyList);
 
+        // GET API with valid JSON body
         mockMvc.perform(get("/student/search")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(searchRequest)))
@@ -118,7 +119,7 @@ class StudentControllerTest {
                 .andExpect(jsonPath("$.studentResponseList").isEmpty());
     }
 
-    // Test case for handling an exception in searchStudent
+
     @Test
     public void testSearchStudent_Exception() throws Exception {
 
@@ -131,7 +132,7 @@ class StudentControllerTest {
                 .thenThrow(new Exception("Invalid Search Key " + searchRequest.getSearchKey()));
 
 
-        // POST API with valid JSON body
+        // GET API with valid JSON body
         mockMvc.perform(get("/student/search")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(searchRequest)))
