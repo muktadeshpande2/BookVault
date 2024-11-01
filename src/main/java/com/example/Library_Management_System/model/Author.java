@@ -11,17 +11,16 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Getter
     private String name;
 
     @Column(unique = true, nullable = false)
-    @Getter
     private String email;
 
     @OneToMany(mappedBy = "book_author")
