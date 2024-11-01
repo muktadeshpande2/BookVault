@@ -31,18 +31,18 @@ public class StudentServiceTest {
     @Test
     public void testAddStudentOrUpdate() {
         Student student = Student.builder()
-                .id(1)
-                .name("John")
-                .age(12)
-                .email("john@gmail.com")
-                .rollNumber("12")
-                .build();
+                                .id(1)
+                                .name("John")
+                                .age(12)
+                                .build();
 
-        when(mockStudentDao.save(student)).thenReturn(student);
+        studentService.addStudentOrUpdate(student);
+
+        verify(mockStudentDao, times(1)).save(student);
     }
 
     @Test
-    public void testFindStudentById() throws Exception {
+    public void testSearchStudentById() throws Exception {
 
         String searchKey = "id";
         String searchValue = "1";
@@ -50,9 +50,6 @@ public class StudentServiceTest {
         Student expectedStudent = Student.builder()
                 .id(1)
                 .name("John")
-                .age(12)
-                .email("john@gmail.com")
-                .rollNumber("12")
                 .build();
 
         when(mockStudentDao.findById(Integer.parseInt(searchValue))).thenReturn(Optional.ofNullable(expectedStudent));
@@ -62,7 +59,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testFindStudentByRollNumber() throws Exception {
+    public void testSearchStudentByRollNumber() throws Exception {
 
         String searchKey = "rollNumber";
         String searchValue = "12";
@@ -84,7 +81,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testFindStudentByName() throws Exception {
+    public void testSearchStudentByName() throws Exception {
 
         String searchKey = "name";
         String searchValue = "John";
@@ -130,21 +127,11 @@ public class StudentServiceTest {
 
 
     @Test
-    public void testFindStudentByInvalidSearchKey() throws Exception {
+    public void testSearchStudentByInvalidSearchKey() throws Exception {
         String searchKey = "InvalidSearchKey";
         String searchValue = "1";
 
         assertThrows(Exception.class, () -> studentService.searchStudent(searchKey, searchValue));
     }
 
-    @Test
-    public void addStudentOrUpdate() throws Exception {
-        Student student = new Student();
-        student.setId(1);
-        student.setName("John Walker");
-
-        studentService.addStudentOrUpdate(student);
-
-        verify(mockStudentDao, times(1)).save(student);
-    }
 }
