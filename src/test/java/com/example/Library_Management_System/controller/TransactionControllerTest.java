@@ -3,7 +3,6 @@ package com.example.Library_Management_System.controller;
 import com.example.Library_Management_System.dto.FetchTransactionRequest;
 import com.example.Library_Management_System.dto.FetchTransactionResponse;
 import com.example.Library_Management_System.dto.InitiateTransactionRequest;
-import com.example.Library_Management_System.dto.SearchStudentResponse;
 import com.example.Library_Management_System.model.Transaction;
 import com.example.Library_Management_System.model.TransactionStatus;
 import com.example.Library_Management_System.model.TransactionType;
