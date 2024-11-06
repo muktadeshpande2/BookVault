@@ -45,7 +45,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void initiateTxn_InvalidStudentRollNumber() throws Exception {
+    public void testInitiateTxn_InvalidStudentRollNumber() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("Roll_Number");
         request.setTransactionType(TransactionType.valueOf("ISSUE"));
@@ -60,7 +60,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void initiateTxn_InvalidAdmin() throws Exception {
+    public void testInitiateTxn_InvalidAdmin() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -77,7 +77,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void initiateTxn_InvalidBook() throws Exception {
+    public void testInitiateTxn_InvalidBook() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -97,7 +97,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void initiateTxn_BookAlreadyIssued() throws Exception {
+    public void testInitiateTxn_BookAlreadyIssued() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -129,7 +129,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void initiateTxn_IssueLimitReached() throws Exception {
+    public void testInitiateTxn_IssueLimitReached() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -171,7 +171,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void initiateTxn_ValidationSuccessful() throws Exception {
+    public void testInitiateTxn_ValidationSuccessful() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -206,7 +206,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void initiateTxn_InvalidStudentRollNumberReturnBook() throws Exception {
+    public void testInitiateTxn_InvalidStudentRollNumberReturnBook() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("Roll_Number");
         request.setTransactionType(TransactionType.valueOf("RETURN"));
@@ -221,7 +221,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void initiateTxn_InvalidAdminReturnBook() throws Exception {
+    public void testInitiateTxn_InvalidAdminReturnBook() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -238,7 +238,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void initiateTxn_InvalidBookReturnBook() throws Exception {
+    public void testInitiateTxn_InvalidBookReturnBook() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -258,7 +258,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void initiateTxn_ValidationSuccessfulReturnTxn() throws Exception {
+    public void testInitiateTxn_ValidationSuccessfulReturnTxn() throws Exception {
         InitiateTransactionRequest request = new InitiateTransactionRequest();
         request.setStudentRollNumber("18UCS070");
         request.setAdminId(100);
@@ -299,7 +299,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void searchTransaction_IssueTransaction() throws Exception {
+    public void testSearchTransaction_IssueTransaction() throws Exception {
         String searchKey = "TransactionType";
         String searchValue = "ISSUE";
 
@@ -316,7 +316,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void searchTransaction_ReturnTransaction() throws Exception {
+    public void testSearchTransaction_ReturnTransaction() throws Exception {
         String searchKey = "TransactionType";
         String searchValue = "RETURN";
 
@@ -333,7 +333,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void searchTransaction_SuccessStatus() throws Exception {
+    public void testSearchTransaction_SuccessStatus() throws Exception {
         String searchKey = "TransactionStatus";
         String searchValue = "SUCCESS";
 
@@ -350,7 +350,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void searchTransaction_FailureStatus() throws Exception {
+    public void testSearchTransaction_FailureStatus() throws Exception {
         String searchKey = "TransactionStatus";
         String searchValue = "FAILURE";
 
@@ -366,7 +366,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void searchTransaction_PendingStatus() throws Exception {
+    public void testSearchTransaction_PendingStatus() throws Exception {
         String searchKey = "TransactionStatus";
         String searchValue = "PENDING";
 
@@ -383,7 +383,7 @@ public class TransactionServiceTest {
 
 
     @Test
-    public void searchTransaction_Exception() throws Exception {
+    public void testSearchTransaction_Exception() throws Exception {
         String searchKey = "TransactionDate";
         String searchValue = "SUCCESS";
 

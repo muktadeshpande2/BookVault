@@ -42,8 +42,6 @@ public class CSVImportServiceTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-
-
     }
 
 
@@ -71,7 +69,7 @@ public class CSVImportServiceTest {
     }
 
     @Test
-    public void testProcessCSVAndSaveStudent_IOException() throws Exception {
+    public void testProcessCSVAndSaveStudent_IOException() {
         String csvContent = "Name,Age,Email,RollNumber\n"
                 + "John Doe,20,johndoe@example.com,1001\n"
                 + "Jane Smith,22,janesmith@example.com,1002\n";
@@ -121,7 +119,7 @@ public class CSVImportServiceTest {
     }
 
     @Test
-    public void testProcessCSVAndSaveAdmin_IOException() throws Exception {
+    public void testProcessCSVAndSaveAdmin_IOException() {
         String csvContent = "Name,Age,Email,RollNumber\n"
                 + "John Doe,20,johndoe@example.com,1001\n"
                 + "Jane Smith,22,janesmith@example.com,1002\n";
@@ -171,7 +169,7 @@ public class CSVImportServiceTest {
     }
 
     @Test
-    public void testProcessCSVAndSaveAuthor_IOException() throws Exception {
+    public void testProcessCSVAndSaveAuthor_IOException() {
         String csvContent = "Name,Age,Email,RollNumber\n"
                 + "John Doe,20,johndoe@example.com,1001\n"
                 + "Jane Smith,22,janesmith@example.com,1002\n";
@@ -220,7 +218,7 @@ public class CSVImportServiceTest {
     }
 
     @Test
-    public void testProcessCSVAndSaveBook_IOException() throws Exception {
+    public void testProcessCSVAndSaveBook_IOException() {
         String csvContent = "Name,Price,Genre,Publication, Book_Author_Id\n"
                 + "Harry Potter,200.9,FICTION,SWAN,2\n"
                 + "Jane Eyre,224,FICTION,SWAN,3\n";
