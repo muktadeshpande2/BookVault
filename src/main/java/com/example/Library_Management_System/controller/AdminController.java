@@ -21,10 +21,18 @@ public class AdminController {
     @PostMapping("/create")
     public ResponseEntity<String>createOrUpdateAdmin(@RequestBody @Valid CreateAdminRequest createAdminRequest) {
 
-        adminService.createOrUpdateAdmin(createAdminRequest.to());
+        try{
+            adminService.createOrUpdateAdmin(createAdminRequest.to());
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("Admin got created successfully");
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("Admin got created successfully");
+
+        } catch(Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
+        
     }
 }
