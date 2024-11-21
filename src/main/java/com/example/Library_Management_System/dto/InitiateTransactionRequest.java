@@ -9,7 +9,6 @@ import lombok.*;
 @Getter @Setter
 public class InitiateTransactionRequest {
 
-
     @NotNull
     private String studentRollNumber;
 

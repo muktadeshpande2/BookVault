@@ -130,6 +130,7 @@ public class TransactionService {
                     .admin(admin)
                     .transactionType(TransactionType.RETURN)
                     .transactionStatus(TransactionStatus.PENDING)
+                    .fine(fine)
                     .build();
 
 
