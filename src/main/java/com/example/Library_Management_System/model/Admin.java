@@ -29,4 +29,8 @@ public class Admin {
 
     @CreationTimestamp
     private Date createdOn;
+
+    @OneToOne
+    @JoinColumn
+    private User user;
 }
