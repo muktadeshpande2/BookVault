@@ -1,7 +1,8 @@
 package com.example.Library_Management_System;
 
 import com.example.Library_Management_System.model.Admin;
-import com.example.Library_Management_System.repository.AdminDao;
+import com.example.Library_Management_System.model.User;
+import com.example.Library_Management_System.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class LibraryManagementSystemApplication implements CommandLineRunner{
 
 	private static final Logger log = LoggerFactory.getLogger(LibraryManagementSystemApplication.class);
 
-	@Autowired
-	AdminDao adminDao;
+//	@Autowired
+//	AdminService adminService;
 
 	public static void main(String[] args) {
 		log.info("Here Before run");
@@ -30,8 +31,12 @@ public class LibraryManagementSystemApplication implements CommandLineRunner{
 //		Admin admin = Admin.builder()
 //				.name("Admin")
 //				.email("admin@hotmail.com")
+//				.user(User.builder()
+//						.username("admin")
+//						.password("123456789")
+//						.build())
 //				.build();
 //
-//		adminDao.save(admin);
+//		adminService.createOrUpdateAdmin(admin);
 	}
 }
