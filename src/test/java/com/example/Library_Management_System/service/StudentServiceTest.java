@@ -29,7 +29,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testAddStudentOrUpdate() {
+    public void testAddStudentOrUpdate() throws Exception {
         Student student = Student.builder()
                                 .id(1)
                                 .name("John")
