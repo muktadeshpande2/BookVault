@@ -1,6 +1,10 @@
 package com.example.Library_Management_System.service;
 
+import com.example.Library_Management_System.Utils.Constants;
+import com.example.Library_Management_System.model.Admin;
 import com.example.Library_Management_System.model.Student;
+import com.example.Library_Management_System.model.User;
+import com.example.Library_Management_System.repository.StudentCacheRepo;
 import com.example.Library_Management_System.repository.StudentDao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -23,18 +28,43 @@ public class StudentServiceTest {
     @InjectMocks
     private StudentService studentService;
 
+    @Mock
+    private UserService mockUserService;
+
+    @Mock
+    private StudentCacheRepo mockStudentCacheRepo;
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
+    public void testAddStudentOrUpdate_Exception() throws Exception {
+        Student student = new Student();
+        User user = new User();
+        user.setId(null);
+        student.setUser(user);
+
+        when(mockUserService.save(Constants.STUDENT_USER, user)).thenReturn(user);
+
+
+        Exception exception = assertThrows(Exception.class, () ->{studentService.addStudentOrUpdate(student);
+        });
+
+        assertEquals("Invalid User", exception.getMessage());
+        verify(mockUserService, times(1)).save(Constants.STUDENT_USER, user);
+        verifyNoInteractions(mockStudentDao);
+    }
+
+    @Test
     public void testAddStudentOrUpdate() throws Exception {
-        Student student = Student.builder()
-                                .id(1)
-                                .name("John")
-                                .age(12)
-                                .build();
+        Student student = new Student();
+        User user = new User();
+        user.setId(1);
+        student.setUser(user);
+
+        when(mockUserService.save(Constants.STUDENT_USER, user)).thenReturn(user);
 
         studentService.addStudentOrUpdate(student);
 
@@ -52,7 +82,26 @@ public class StudentServiceTest {
                 .name("John")
                 .build();
 
+
+        when(mockStudentCacheRepo.getStudent(1)).thenReturn(null);
         when(mockStudentDao.findById(Integer.parseInt(searchValue))).thenReturn(Optional.ofNullable(expectedStudent));
+        List<Student> actualStudent = studentService.searchStudent(searchKey, searchValue);
+
+        Assertions.assertEquals(expectedStudent, actualStudent.getFirst());
+    }
+
+    @Test
+    public void testSearchStudentById_StudentIsNotInCache() throws Exception {
+        String searchKey = "id";
+        String searchValue = "1";
+
+        Student expectedStudent = Student.builder()
+                .id(1)
+                .name("John")
+                .build();
+
+        when(mockStudentDao.findById(Integer.parseInt(searchValue))).thenReturn(Optional.ofNullable(expectedStudent));
+        when(mockStudentCacheRepo.getStudent(1)).thenReturn(expectedStudent);
         List<Student> actualStudent = studentService.searchStudent(searchKey, searchValue);
 
         Assertions.assertEquals(expectedStudent, actualStudent.getFirst());
