@@ -23,4 +23,12 @@ public class StudentResponse {
     private Date createdOn;
 
     private Date updatedOn;
+
+    private String errorMessage;
+
+    public static StudentResponse createErrorResponse(String errorMessage) {
+        return StudentResponse.builder()
+                .errorMessage(errorMessage)
+                .build();
+    }
 }
