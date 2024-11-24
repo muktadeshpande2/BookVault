@@ -12,19 +12,19 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AdminControllerTest {
 
-
     @InjectMocks
     private AdminController adminController;
 
     @Mock
-    AdminService adminService;
+    private AdminService adminService;
 
     private MockMvc mockMvc;
 
@@ -42,8 +42,10 @@ public class AdminControllerTest {
         CreateAdminRequest request = new CreateAdminRequest();
         request.setName("Admin");
         request.setEmail("example@xyz.com");
+        request.setUsername("admin");
+        request.setPassword("1234");
 
-        doNothing().when(adminService).createOrUpdateAdmin(request.to());
+        doNothing().when(adminService).createOrUpdateAdmin(any());
 
         // POST API with valid JSON body
         mockMvc.perform(post("/admin/create")
@@ -52,4 +54,5 @@ public class AdminControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().string("Admin got created successfully"));
     }
+
 }
