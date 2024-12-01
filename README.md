@@ -7,10 +7,15 @@ CRUD application with functionality to issue and return books along with fine ca
 
 Tech Stack: Spring Boot Framework, REST APIs, MySQL as primary database, Redis as cache, Junit & Mockito Framework for unit testing.
 Programming Language: Java 21
+
 Frameworks: Spring Boot, Spring MVC, Spring Data JPA
+
 Database: MySQL, Redis
+
 Testing Frameworks: JUnit, Mockito
+
 API Testing: Postman
+
 Build Tool: Maven
 
 JDK 22 and Maven must be installed prior to running this project locally.
