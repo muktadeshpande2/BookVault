@@ -2,8 +2,23 @@
 Digital Library
 
 Digital Library Management System for educational institutions.
+
 CRUD application with functionality to issue and return books along with fine calculation.
 
 Tech Stack: Spring Boot Framework, REST APIs, MySQL as primary database, Redis as cache, Junit & Mockito Framework for unit testing.
- 
-To run the project locally, one must install JDK and Maven
+Programming Language: Java 21
+Frameworks: Spring Boot, Spring MVC, Spring Data JPA
+Database: MySQL, Redis
+Testing Frameworks: JUnit, Mockito
+API Testing: Postman
+Build Tool: Maven
+
+JDK 22 and Maven must be installed prior to running this project locally.
+
+To run the project locally:
+1. Download the compressed project folder from the repository.
+2. Extract the project folder
+3. Open the project folder in any IDE(preferably Intellij Idea IDE)
+4. Run the project by clicking on the Run Icon on the top left corner of IDE.
+
+The project gets hosted on localhost.
