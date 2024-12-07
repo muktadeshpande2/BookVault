@@ -1,5 +1,4 @@
-# Library-Management-System
-Digital Library
+# BookVault
 
 Digital Library Management System for educational institutions.
 
